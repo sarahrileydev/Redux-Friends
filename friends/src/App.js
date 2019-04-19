@@ -1,13 +1,29 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
+import PrivateRoute from './components/PrivateRoute';
+import Login from './components/Login';
+import FriendsListView from './views/FriendsListView';
 
 class App extends Component {
   render() {
     return (
+      <Router>
       <div className="App">
-      <h1>I am the APP</h1>
+        <ul>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+          <li>
+            <Link to="/protected">Protected Page</Link>
+          </li>
+        </ul>
+        <Route path="/login" component={Login} />
+        <PrivateRoute exact path="/protected" component={FriendsListView} />
       </div>
+    </Router>
     );
   }
 }
